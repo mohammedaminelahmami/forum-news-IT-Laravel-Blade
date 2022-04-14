@@ -1,0 +1,54 @@
+.myClass{
+    transition: 330ms;
+    outline: #06113C solid 3px;
+    opacity: 0.9;
+}
+
+.myClass:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+    outline: #06113C solid 3px;
+    opacity: 1;
+}
+
+.like_dislike{
+    transition: 330ms;
+}
+
+.like_dislike:hover{
+    transform: scale(1.15);
+    cursor: pointer;
+}
+
+#menuBtn{
+    display: none;
+}
+
+@media(max-width: 640px)
+{
+    #menuBtn{
+        display: block;
+    }
+
+    #my_nav{
+        display: none;
+    }
+
+    #my_nav.show_menu{
+		width: 100%;
+        z-index: 99999999;
+        display: block;
+        padding: 1rem;
+        background-color: #06113C;
+        top: 10%;
+        left: 0%;
+        position: absolute;
+    }
+
+    .myClass{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+}
