@@ -70,7 +70,7 @@
                     {{-- StartComments --}}
                         <form action="">
                             <textarea name="comment" id="comment" class="bg-gray-100 border-2 w-full p-4 rounded-md @error('comment') border-red-500 @enderror" cols="30" rows="1" placeholder="Write a public comment..."></textarea>
-                            <button type="submit" class="bg-secondColor text-favColor px-4 py-2 rounded-md text-sm font-medium">Comment</button>
+                            <button type="submit" class="bg-secondColor text-favColor px-4 py-2 mt-2 rounded-md text-sm font-medium">Comment</button>
                         </form>
                     {{-- EndComments --}}
 
@@ -103,7 +103,7 @@
                     {{-- StartComments --}}
                         <form action="">
                             <textarea name="comment" id="comment" class="bg-gray-100 border-2 w-full p-4 rounded-md @error('comment') border-red-500 @enderror" cols="30" rows="1" placeholder="Write a public comment..."></textarea>
-                            <button type="submit" class="bg-secondColor text-favColor px-4 py-2 rounded-md text-sm font-medium">Comment</button>
+                            <button type="submit" class="bg-secondColor text-favColor px-4 py-2 mt-2 rounded-md text-sm font-medium">Comment</button>
                         </form>
                     {{-- EndComments --}}
 
