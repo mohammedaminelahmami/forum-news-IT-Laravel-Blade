@@ -27,6 +27,7 @@
     </center>
 
     <div class="flex items-center flex-col mt-8">
+        @auth
         <div class="w-1/2 bg-white p-6 rounded-md mb-5">
             <form action="{{ route('home') }}" method="POST">
                 @csrf
@@ -45,74 +46,50 @@
                 </div>
             </form>
         </div>
+        @endauth
 
-        <!-- StartPost -->
+        @guest
+            <button class="btn" onclick="location.href='{{ route('login') }}' ">Post</button>
+        @endguest
 
-        <div class="w-6/12 bg-white p-6 rounded-md">
-            <div class="">
-                <div class="flex text-gray-400 text-xs mb-2 gap-2">
-                    <img src="{{ asset('imgs/avatar.webp') }}" width="30" alt="avatar">
-                    <p class="mt-1">Posted By Mohammed Amine 6 hours ago</p>
-                </div>
-                <!-- StartContent -->
-                <div class="">
-                    <p>Should I learn JavaScript or Python? 🤨🤨</p>
-                    <img src="{{ asset('imgs/cnt1.jpg') }}" width="1000" alt="cnt1" class="mt-2">
 
-                </div>
-                <!-- EndContent -->
-                <div class="flex flex-col gap-3 my-2">
-                    <div class="flex flex-row gap-2">
-                        <div class="text-orangeColor font-semibold">Like</div>
-                        <div class="text-favColor font-semibold">DisLike</div>
+        @if ($posts->count())
+            @foreach ($posts->reverse() as $post)
+                <!-- StartPost -->
+                <div class="w-6/12 bg-white p-6 rounded-md mt-5">
+                    <div class="">
+                        <div class="flex text-gray-400 text-xs mb-2 gap-2">
+                            <img src="{{ asset('imgs/avatar.webp') }}" width="30" alt="avatar">
+                            <p class="mt-1">Posted By {{ $post->user->name }} | {{ $post->user->updated_at }}</p>
+                        </div>
+                        <div class="">
+                            <p>{{ $post->body }}, </p>
+                            <img src="{{ asset('imgs/cnt1.jpg') }}" width="1000" alt="cnt1" class="mt-2">
+
+                        </div>
+
+                        <div class="flex flex-col gap-3 my-2">
+                            <div class="flex flex-row gap-2">
+                                <div class="text-orangeColor font-semibold">Like</div>
+                                <div class="text-favColor font-semibold">DisLike</div>
+                            </div>
+
+                            {{-- StartComments --}}
+                            <form action="">
+                                <textarea name="comment" id="comment" class="bg-gray-100 border-2 w-full p-4 rounded-md @error('comment') border-red-500 @enderror" cols="30" rows="1" placeholder="Write a public comment..."></textarea>
+                                <button type="submit" class="bg-secondColor text-favColor px-4 py-2 mt-2 rounded-md text-sm font-medium">Comment</button>
+                            </form>
+                            {{-- EndComments --}}
+
+                        </div>
                     </div>
-
-                    {{-- StartComments --}}
-                        <form action="">
-                            <textarea name="comment" id="comment" class="bg-gray-100 border-2 w-full p-4 rounded-md @error('comment') border-red-500 @enderror" cols="30" rows="1" placeholder="Write a public comment..."></textarea>
-                            <button type="submit" class="bg-secondColor text-favColor px-4 py-2 mt-2 rounded-md text-sm font-medium">Comment</button>
-                        </form>
-                    {{-- EndComments --}}
-
                 </div>
-            </div>
-        </div>
 
-        <!-- EndPost -->
-
-        <!-- StartPost -->
-
-        <div class="w-6/12 bg-white p-6 rounded-md mt-5">
-            <div class="">
-                <div class="flex text-gray-400 text-xs mb-2 gap-2">
-                    <img src="{{ asset('imgs/avatar.webp') }}" width="30" alt="avatar">
-                    <p class="mt-1">Posted By Youssef Wakhidi 8 hours ago</p>
-                </div>
-                <!-- StartContent -->
-                <div class="">
-                    <p>Hey, </p>
-                    <img src="{{ asset('imgs/cnt2.png') }}" width="1000" alt="cnt2" class="mt-2">
-
-                </div>
-                <div class="flex flex-col gap-3 my-2">
-                    <div class="flex flex-row gap-2">
-                        <div class="text-orangeColor font-semibold">Like</div>
-                        <div class="text-favColor font-semibold">DisLike</div>
-                    </div>
-
-                    {{-- StartComments --}}
-                        <form action="">
-                            <textarea name="comment" id="comment" class="bg-gray-100 border-2 w-full p-4 rounded-md @error('comment') border-red-500 @enderror" cols="30" rows="1" placeholder="Write a public comment..."></textarea>
-                            <button type="submit" class="bg-secondColor text-favColor px-4 py-2 mt-2 rounded-md text-sm font-medium">Comment</button>
-                        </form>
-                    {{-- EndComments --}}
-
-                </div>
-            </div>
-        </div>
-
-        <!-- EndPost -->
-
+                <!-- EndPost -->
+            @endforeach
+        @else
+            <p> No Posts </p>
+        @endif
     </div>
 
 @endsection

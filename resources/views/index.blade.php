@@ -24,18 +24,18 @@
         <ul class="flex items-center mr-10 gap-5" id="my_nav">
         @if(auth()->user())
                 <li>
-                    <a href="{{ route('profile') }}" class="p-3 myClass">{{ auth()->user()->name }}</a>
+                    <a href="{{ route('profile') }}" class="p-3 myClass2">{{ auth()->user()->name }}</a>
                 </li>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
-                    <center><button type="submit" class="pr-6 ml-2 myClass">Logout</button></center>
+                    <center><button type="submit" class="pr-6 ml-2 myClass2">Logout</button></center>
                 </form>
             @else
                 <li>
-                    <a href="{{ route('login') }}" class="p-3 myClass">Login</a>
+                    <a href="{{ route('login') }}" class="p-3 myClass2">Login</a>
                 </li>
                 <li>
-                    <a href="{{ route('register') }}" class="p-3 myClass">Register</a>
+                    <a href="{{ route('register') }}" class="p-3 myClass2">Register</a>
                 </li>
             @endif
         </ul>
