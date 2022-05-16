@@ -4,16 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class LoginController extends Controller
+class AdminController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest');
+        // middleware
     }
     
-    public function index()
+    public function login()
     {
-        return view('auth.login');
+        return view('Admin/login');
     }
 
     public function store(Request $request)
@@ -31,6 +31,11 @@ class LoginController extends Controller
         }
 
         // redirect
-        return redirect()->route('home');
+        return redirect()->route('adminHome');
+    }
+
+    public function logout()
+    {
+        
     }
 }
