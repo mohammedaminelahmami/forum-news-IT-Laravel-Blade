@@ -1,11 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,15 +16,27 @@ use App\Http\Controllers\RegisterController;
 |
 */
 
-Route::get('/', [PostController::class, 'index'])->name('home');
-Route::post('/', [PostController::class, 'store']);
+Route::group(['middleware' => 'web'], function(){
+    // User
+    Route::controller(UserController::class)->group(function(){
+        Route::get('/register', 'indexRegister')->name('register');
+        Route::post('/register', 'storeRegister');
+        Route::get('/login', 'indexLogin')->name('login');
+        Route::post('/login', 'storeLogin');
+        Route::get('/profile', 'profile')->name('profile');
+        Route::get('/logout', 'logoutUser')->name('logoutUser');
+    });
 
-Route::get('/register', [RegisterController::class, 'index'])->name('register');
-Route::post('/register', [RegisterController::class, 'store']);
+    // Post
+    Route::controller(PostController::class)->group(function(){
+        Route::get('/', 'index')->name('home');
+        Route::post('/', 'store');
+    });
 
-Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('/login', [LoginController::class, 'store']);
-
-Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
-
-Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    // Admin { Login, Logout }
+    Route::controller(AdminController::class)->group(function(){
+        Route::get('/loginAdmin', 'login')->name('loginAdmin');
+        Route::post('/loginAdmin', 'store');
+        Route::post('/logoutAdmin', 'logout')->name('logoutAdmin');
+    });
+});
